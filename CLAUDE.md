@@ -20,9 +20,13 @@
 | mc-listing | Amazon Listing 优化（标题/Bullet Points/Search Terms/A+） |
 | mc-compete | 跨境竞品策略分析 |
 | mc-monitor | 跨境竞品数据监控 |
-| mc-ads | 广告投放策略（Amazon PPC + Meta/Google） |
+| mc-ads | 广告投放策略（Amazon PPC + Meta/Google + 防御性投放） |
+| mc-selection | 跨境选品研究（品类机会 + 竞争格局 + 决策矩阵） |
+| mc-cost | 利润与成本计算（FBA 费用 + 关税 + 定价 + 多平台对比） |
+| mc-logistics | 跨境物流决策（头程选择 / FBA vs 3PL / 备货计划） |
+| mc-sop | 运营效率工具箱（日常SOP / 复盘框架 / 团队分工 / 运营日历） |
 | mc-insight | 目标市场文化洞察 |
-| mc-compliance | 跨境合规审查 |
+| mc-compliance | 跨境合规审查（含税务 / HS Code / VAT） |
 
 ## 约定
 
