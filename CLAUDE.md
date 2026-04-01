@@ -51,6 +51,7 @@ mc-cmo 是 MarketerClaw Global 的 CMO 核心引擎，负责：
 | mc-sop | 运营效率工具箱（日常SOP / 复盘框架 / 团队分工 / 运营日历） |
 | mc-insight | 目标市场文化洞察 |
 | mc-compliance | 跨境合规审查（含税务 / HS Code / VAT） |
+| mc-poster | 视觉素材设计（Amazon 主图/A+/广告素材/多市场适配） |
 
 ## 约定
 
