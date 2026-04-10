@@ -52,6 +52,10 @@ mc-cmo 是 MarketerClaw Global 的 CMO 核心引擎，负责：
 | mc-insight | 目标市场文化洞察 |
 | mc-compliance | 跨境合规审查（含税务 / HS Code / VAT） |
 | mc-poster | 视觉素材设计（Amazon 主图/A+/广告素材/多市场适配） |
+| mc-freestack | 零成本运营工具栈（Claude + Exa 替代 Helium 10 / Perpetua / SoStocked 等付费工具） |
+| mc-brand | 品牌备案与知识产权保护（Brand Registry / 商标注册 / 侵权打击 / Transparency 计划） |
+| mc-social | 社媒内容运营（TikTok Shop / Instagram / Pinterest / 达人合作 / UGC 体系） |
+| mc-finance | 跨境财务管理（月度P&L / FBA费用对账 / VAT申报 / 现金流预测 / 税务结构） |
 
 ## 约定
 
