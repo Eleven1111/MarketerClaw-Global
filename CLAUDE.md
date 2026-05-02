@@ -4,9 +4,12 @@
 
 **所有跨境营销请求必须先经过 mc-cmo。**
 
-mc-cmo 是 MarketerClaw Global 的 CMO 核心引擎，负责：
+mc-cmo 是 MarketerClaw Global 的 CMO 核心引擎（Hub），负责：
 - 判断请求是否合理，开口先算账
 - 根据用户关系阶段（new/building/partner）调节干预强度
+- 检测危机模式（cash_crisis/listing_crisis/stock_crisis）
+- 感知季节阶段，调整策略倾向
+- 匹配预设工作流，串联多技能执行
 - 判断完成后交给 mc-dispatch 执行
 
 用户也可以用 `/mc-xxx` 命令直接调用技能（mc-cmo 仍在场但不判断）。
@@ -14,12 +17,26 @@ mc-cmo 是 MarketerClaw Global 的 CMO 核心引擎，负责：
 ### 技能调用顺序
 
 ```
-用户请求 → mc-cmo（判断）→ mc-dispatch（路由+执行）→ 具体技能
+用户请求 → mc-cmo（判断+危机检测+工作流匹配）→ mc-dispatch（路由+上下文交接）→ 具体技能
 ```
 
-### 用户画像
+### Brand Brain 数据总线
 
-存储在 `memory/default/profile.md`，mc-cmo 每次对话开始加载、结束时更新。
+所有技能共享 `brand-brain/` 目录作为数据层：
+
+```
+brand-brain/
+├── profile.md         用户画像（阶段/偏好/盲区）
+├── brand-master.md    品牌定位/声音/价值主张
+├── products.md        产品矩阵（SKU/ASIN/价格/利润率/阶段）
+├── audience.md        目标客群画像
+├── competitors.md     竞品情报（mc-compete 写入）
+├── metrics.md         核心指标基线（mc-dashboard 写入）
+├── offers.md          当前促销策略
+└── learnings.jsonl    结构化学习日志（所有技能 append）
+```
+
+技能按需加载 Brand Brain 文件，不全量加载。mc-dispatch 在交接时指定建议加载的文件列表。
 
 ---
 
@@ -35,27 +52,79 @@ mc-cmo 是 MarketerClaw Global 的 CMO 核心引擎，负责：
 - **合规**：FDA/CE/FBA 政策/各国进口法规（非中国广告法）
 - **数据**：BSR 排名、Review 增速、Keepa 价格追踪（非生意参谋/蝉妈妈）
 
-## 技能清单（第一期）
+## 技能清单
 
+### 系统层
 | 技能 | 职责 |
 |------|------|
-| mc-cmo | CMO 核心引擎，判断+人格+用户认知 |
-| mc-dispatch | 执行路由层，技能路由+参数传递 |
-| mc-listing | Amazon Listing 优化（标题/Bullet Points/Search Terms/A+） |
-| mc-compete | 跨境竞品策略分析 |
-| mc-monitor | 跨境竞品数据监控 |
-| mc-ads | 广告投放策略（Amazon PPC + Meta/Google + 防御性投放） |
+| mc-cmo | Hub — CMO 核心引擎 + 工作流编排 + 危机/季节感知 |
+| mc-dispatch | 路由层 — 上下文交接协议 + 越界回交 |
+
+### 诊断与数据层
+| 技能 | 职责 |
+|------|------|
+| mc-diagnose | 全链路诊断引擎（8 维诊断 + ICE 优先级） |
+| mc-dashboard | 数据看板与健康体检（三层看板 + 异常预警） |
+
+### 产品与供应链层
+| 技能 | 职责 |
+|------|------|
 | mc-selection | 跨境选品研究（品类机会 + 竞争格局 + 决策矩阵） |
 | mc-cost | 利润与成本计算（FBA 费用 + 关税 + 定价 + 多平台对比） |
 | mc-logistics | 跨境物流决策（头程选择 / FBA vs 3PL / 备货计划） |
-| mc-sop | 运营效率工具箱（日常SOP / 复盘框架 / 团队分工 / 运营日历） |
+| mc-launch | 新品上市引擎（四阶段框架 + PMF 评估 + 冷启动预算） |
+
+### 流量与转化层
+| 技能 | 职责 |
+|------|------|
+| mc-listing | Amazon Listing 优化（标题/Bullets/Search Terms/A+） |
+| mc-ads | 广告投放策略（Amazon PPC + Meta/Google + 防御性投放） |
+| mc-convert | 转化率优化引擎（Amazon CVR + 独立站 CRO + A/B 测试） |
+| mc-creative | 创意生产（视觉素材 + 广告测试矩阵 + 视频脚本 + 多平台适配） |
+
+### 品牌与用户层
+| 技能 | 职责 |
+|------|------|
+| mc-brand | 品牌备案与知识产权保护 |
+| mc-social | 社媒运营（TikTok/IG/Pinterest + 达人筛选 + UGC 飞轮） |
+| mc-retain | 用户留存与 LTV（RFM 分层 + S&S 优化 + 召回体系） |
+| mc-compete | 竞品分析（6 模块 + 对标学习 + 自动写入 Brand Brain） |
+| mc-monitor | 竞品数据监控 |
 | mc-insight | 目标市场文化洞察 |
+
+### 运营与合规层
+| 技能 | 职责 |
+|------|------|
 | mc-compliance | 跨境合规审查（含税务 / HS Code / VAT） |
-| mc-poster | 视觉素材设计（Amazon 主图/A+/广告素材/多市场适配） |
-| mc-freestack | 零成本运营工具栈（Claude + Exa 替代 Helium 10 / Perpetua / SoStocked 等付费工具） |
-| mc-brand | 品牌备案与知识产权保护（Brand Registry / 商标注册 / 侵权打击 / Transparency 计划） |
-| mc-social | 社媒内容运营（TikTok Shop / Instagram / Pinterest / 达人合作 / UGC 体系） |
-| mc-finance | 跨境财务管理（月度P&L / FBA费用对账 / VAT申报 / 现金流预测 / 税务结构） |
+| mc-sop | 运营效率工具箱（日常SOP / 复盘 / 团队分工 / 运营日历） |
+| mc-finance | 跨境财务管理（月度P&L / FBA对账 / VAT / 现金流） |
+| mc-freestack | 零成本运营工具栈 |
+
+## 全局规范
+
+### 三级降级策略
+
+所有技能在执行前检查数据充分度：
+
+| 级别 | 触发条件 | 执行策略 |
+|------|---------|---------|
+| Level 1 | 部分数据缺失 | 基于已有数据推进 + 标注假设 + 标记待验证项 |
+| Level 2 | 极少数据 | 保守方案 + 标注待验证项 + 列出需要收集的数据 |
+| Level 3 | 零数据 + 无搜索工具 | 行业基准参考 + 明确告知数据缺失 + 不编造数据 |
+
+### 成本标签
+
+所有技能的每条可执行建议必须附带：
+```
+💰 预算：$X    ⏱ 见效：X 周    👤 执行：卖家自己 / VA / 服务商
+```
+
+### Learnings 日志
+
+所有技能执行完成后，向 `brand-brain/learnings.jsonl` 追加一条记录：
+```jsonl
+{"date":"2026-05-02","skill":"mc-ads","finding":"蓝牙耳机品类 CPC 从 $1.2 涨至 $1.5","action":"降低 Broad 竞价 15%","impact":"ACOS 预计降 5-8%","confidence":"medium"}
+```
 
 ## 约定
 
