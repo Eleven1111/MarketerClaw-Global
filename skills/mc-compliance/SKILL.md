@@ -403,6 +403,26 @@ beds, carriages, or playpens. This bag is not a toy.
 | ⚠️ 需补充材料 | 存在 🟡 项但无 🔴 项；或 🔴 项可在短期内解决 |
 | 🚫 高风险暂停 | 存在 🔴 项且短期无法解决（如缺少强制认证、明确侵权） |
 
+### 结构化合规结论（仅 mc-cmo 双环中输出）
+
+在 mc-cmo 第 4 步工作流的内容产出双环中运行时，在记分卡之后追加机器可读尾块（单独被调用做合规审查时**不输出**，保持现状）：
+
+```
+### 合规结论
+verdict: pass | revise
+findings:
+  - target: mc-listing
+    skill: mc-listing
+    severity: block | warn
+    issue: "FDA 警示语缺失 / 绝对化 claim / 商标侵权风险"
+```
+
+映射规则：
+- 综合结论 🚫 高风险暂停 → 至少一条 `severity: block`，`verdict: revise`（硬门禁，必重跑）。
+- ⚠️ 需补充材料 → `severity: warn`（可上架但有待补项），verdict 视严重度。
+- ✅ 可上架 → `verdict: pass`，`findings: []`。
+- `target` / `skill` 为产出被审的生产技能（mc-listing/mc-creative/mc-ads/mc-social）。
+
 ### 优先处理排序
 
 🔴 高风险项按以下优先级排序：

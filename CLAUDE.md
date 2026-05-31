@@ -33,7 +33,8 @@ brand-brain/
 ├── competitors.md     竞品情报（mc-compete 写入）
 ├── metrics.md         核心指标基线（mc-dashboard 写入）
 ├── offers.md          当前促销策略
-└── learnings.jsonl    结构化学习日志（所有技能 append）
+├── learnings.jsonl    结构化学习日志（所有技能 append）
+└── review-loop.md     内容产出双环状态（mc-cmo 工作流维护）
 ```
 
 技能按需加载 Brand Brain 文件，不全量加载。mc-cmo 在交接时指定建议加载的文件列表。
@@ -94,7 +95,8 @@ brand-brain/
 ### 运营与合规层
 | 技能 | 职责 |
 |------|------|
-| mc-compliance | 跨境合规审查（含税务 / HS Code / VAT） |
+| mc-compliance | 跨境合规审查（含税务 / HS Code / VAT）— 双环合规硬门禁 |
+| mc-grade | 内容产出质量评审 evaluator（双环质量软门，独立于生产者） |
 | mc-sop | 运营效率工具箱（日常SOP / 复盘 / 团队分工 / 运营日历） |
 | mc-finance | 跨境财务管理（月度P&L / FBA对账 / VAT / 现金流） |
 | mc-freestack | 零成本运营工具栈 |
