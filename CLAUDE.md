@@ -10,14 +10,14 @@ mc-cmo 是 MarketerClaw Global 的 CMO 核心引擎（Hub），负责：
 - 检测危机模式（cash_crisis/listing_crisis/stock_crisis）
 - 感知季节阶段，调整策略倾向
 - 匹配预设工作流，串联多技能执行
-- 判断完成后交给 mc-dispatch 执行
+- 判断完成后在同一技能内完成路由与执行
 
 用户也可以用 `/mc-xxx` 命令直接调用技能（mc-cmo 仍在场但不判断）。
 
 ### 技能调用顺序
 
 ```
-用户请求 → mc-cmo（判断+危机检测+工作流匹配）→ mc-dispatch（路由+上下文交接）→ 具体技能
+用户请求 → mc-cmo（判断 + 危机检测 + 工作流匹配 + 路由 + 执行）→ 具体技能
 ```
 
 ### Brand Brain 数据总线
@@ -33,10 +33,11 @@ brand-brain/
 ├── competitors.md     竞品情报（mc-compete 写入）
 ├── metrics.md         核心指标基线（mc-dashboard 写入）
 ├── offers.md          当前促销策略
-└── learnings.jsonl    结构化学习日志（所有技能 append）
+├── learnings.jsonl    结构化学习日志（所有技能 append）
+└── review-loop.md     内容产出双环状态（mc-cmo 工作流维护）
 ```
 
-技能按需加载 Brand Brain 文件，不全量加载。mc-dispatch 在交接时指定建议加载的文件列表。
+技能按需加载 Brand Brain 文件，不全量加载。mc-cmo 在交接时指定建议加载的文件列表。
 
 ---
 
@@ -57,8 +58,7 @@ brand-brain/
 ### 系统层
 | 技能 | 职责 |
 |------|------|
-| mc-cmo | Hub — CMO 核心引擎 + 工作流编排 + 危机/季节感知 |
-| mc-dispatch | 路由层 — 上下文交接协议 + 越界回交 |
+| mc-cmo | Hub — CMO 核心引擎 + 路由/执行 + 工作流编排 + 危机/季节感知 |
 
 ### 诊断与数据层
 | 技能 | 职责 |
@@ -95,7 +95,8 @@ brand-brain/
 ### 运营与合规层
 | 技能 | 职责 |
 |------|------|
-| mc-compliance | 跨境合规审查（含税务 / HS Code / VAT） |
+| mc-compliance | 跨境合规审查（含税务 / HS Code / VAT）— 双环合规硬门禁 |
+| mc-grade | 内容产出质量评审 evaluator（双环质量软门，独立于生产者） |
 | mc-sop | 运营效率工具箱（日常SOP / 复盘 / 团队分工 / 运营日历） |
 | mc-finance | 跨境财务管理（月度P&L / FBA对账 / VAT / 现金流） |
 | mc-freestack | 零成本运营工具栈 |
