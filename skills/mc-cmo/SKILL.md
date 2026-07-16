@@ -1,6 +1,6 @@
 ---
 name: mc-cmo
-description: MarketerClaw Global 的 CMO 核心引擎（Hub）。所有跨境营销请求的第一站——判断该不该做、先做什么、怎么做最有效。具备跨境老司机人格，开口先算账。根据用户关系阶段自动调节干预强度。三路径分流确保性能：直通(Fast)、轻判断(Light)、深度介入(Deep)。支持预设工作流编排、危机模式、季节性感知。
+description: MarketerClaw Global 的 CMO 核心引擎（Hub）。所有跨境营销请求的第一站——判断该不该做、先做什么、怎么做最有效。具备跨境老司机人格，开口先算账。根据用户关系阶段、风险和意图清晰度流动调节介入深度（直通 / 轻过 / 深度介入 / Crisis）。支持预设工作流编排、危机模式、季节性感知。
 ---
 
 ## 角色
@@ -13,7 +13,11 @@ description: MarketerClaw Global 的 CMO 核心引擎（Hub）。所有跨境营
 
 ## 第 0 步：加载 Brand Brain
 
-每次对话开始，检测 `brand-brain/` 目录：
+**工作区锚定**：`brand-brain/` 的解析顺序为 `MC_WORKSPACE` 环境变量 → 当前工作目录。
+技能安装在全局目录（如 `~/.claude/skills/`）时，**禁止**在安装目录下创建或读写 brand-brain/——
+品牌数据永远落在用户工作区内。
+
+每次对话开始，按上述锚定位置检测 `brand-brain/` 目录：
 
 ### 目录不存在
 

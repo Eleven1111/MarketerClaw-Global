@@ -60,72 +60,24 @@ description: 跨境电商合规审查。输入产品+目标市场，输出认证
 
 不同国家/地区对同一产品的准入要求差异极大。**认证缺失是跨境卖家最常见的封号原因。**
 
-### 产品类别 × 市场准入矩阵
+### 产品类别 × 市场准入矩阵 — 按市场加载
 
-#### 美国 (US)
+各市场的详细规则（准入矩阵 + Listing 文案市场细则 + 关税框架）存放在本技能目录的
+`references/` 下，**只加载本次审查涉及的市场文件**，不要全部加载：
 
-| 产品类别 | 主管机构 | 必要认证/注册 | 关键要求 |
-|----------|---------|--------------|---------|
-| 食品 | FDA | FDA Food Facility Registration + Prior Notice | 进口前需提交 Prior Notice；标签符合 21 CFR Part 101 |
-| 化妆品 | FDA | MoCRA 注册（2024 年起强制） | 成分须在 FDA VCRP 登记；禁用成分清单见 21 CFR 700 |
-| 膳食补充剂 | FDA | FDA Facility Registration | 标签必须含 "This statement has not been evaluated by the FDA. This product is not intended to diagnose, treat, cure, or prevent any disease." |
-| 消费电子 | FCC | FCC ID / SDoC | 所有辐射电子设备需 FCC 认证；蓝牙/WiFi 设备必须 FCC ID |
-| 儿童产品 | CPSC | CPC (Children's Product Certificate) | 12 岁以下儿童产品需第三方 CPSC-accepted lab 检测；铅含量 ≤ 100ppm |
-| 一般消费品 | CPSC | GCC (General Certificate of Conformity) | 成人产品需 GCC；基于合理测试计划 |
-| 激光产品 | FDA CDRH | Accession Number | 激光产品（含激光笔）需向 FDA CDRH 报告 |
-| 杀虫/消毒产品 | EPA | EPA Registration | 声称 "kills germs/bacteria" 的产品必须 EPA 注册 |
+| 目标市场 | 加载文件 |
+|---------|---------|
+| 美国 (US) | `references/market-us.md` |
+| 欧盟 (EU) | `references/market-eu.md` |
+| 英国 (UK) | `references/market-uk.md` |
+| 日本 (JP) | `references/market-jp.md` |
+| 澳大利亚 (AU) | `references/market-au.md` |
 
-**实例：** 一个带蓝牙功能的儿童智能手表，同时需要 FCC ID（蓝牙辐射）+ CPC（儿童产品）+ 铅含量检测 + 小零件窒息风险评估。漏掉任何一项都可能被海关扣货或 Amazon 下架。
-
-#### 欧盟 (EU)
-
-| 产品类别 | 核心法规 | 必要认证/标识 | 关键要求 |
-|----------|---------|-------------|---------|
-| 几乎所有消费品 | 相关 EU 指令 | CE Marking | CE 标识是进入欧盟市场的"护照"；需自行或通过 NB 评估符合性 |
-| 电子电气产品 | LVD + EMC | CE (LVD 2014/35/EU + EMC 2014/30/EU) | 低压指令 + 电磁兼容；需技术文档 + DoC 声明 |
-| 含化学物质产品 | REACH | REACH 合规（SVHC ≤ 0.1%） | 高关注物质清单每年更新；卖家是 "Only Representative" 或需指定一个 |
-| 电子电气产品 | RoHS | RoHS 2011/65/EU | 铅、汞、镉等 10 种有害物质限制 |
-| 电子电气产品 | WEEE | WEEE 注册 + 标识 | 每个 EU 成员国单独注册；产品须印"打叉垃圾桶"标识 |
-| 医疗器械 | EU MDR 2017/745 | CE (通过 Notified Body) | 2024 年起全面执行 MDR；Class I 以上需 NB 参与 |
-| 玩具 | Toy Safety Directive 2009/48/EC | CE + EN 71 检测 | 机械物理 + 化学 + 可燃性检测 |
-| 化妆品 | EU Cosmetics Regulation 1223/2009 | CPNP 通报 + PIF | 上市前须在 CPNP 系统通报；需完整 Product Information File |
-| 食品 | General Food Law + 标签法规 | — | 标签须含过敏原信息（14 种）；营养成分表强制 |
-
-**实例：** 一个 USB 充电的 LED 台灯出口欧盟，需要：CE（LVD + EMC）+ RoHS 检测报告 + REACH SVHC 声明 + WEEE 注册（每个目标国家）+ DoC 符合性声明 + 技术文档存档 10 年。成本预估：检测费 ¥8,000-15,000 + 各国 WEEE 注册费。
-
-#### 英国 (UK)
-
-| 要点 | 说明 |
-|------|------|
-| UKCA 标识 | 脱欧后英国自有标识，取代 CE（但目前延期接受 CE 标识至 2025 年底，需关注最新政策） |
-| UK Responsible Person | 必须在英国境内指定一名 Responsible Person，负责合规文档 |
-| UK REACH | 独立于 EU REACH，需单独注册 |
-| WEEE 注册 | 在 UK Environment Agency 单独注册 |
-
-**关键提醒：** UK 政策变化频繁，每次审查须确认 UKCA/CE 接受截止日期的最新状态。
-
-#### 日本 (JP)
-
-| 产品类别 | 主管机构/法规 | 必要认证 | 关键要求 |
-|----------|-------------|---------|---------|
-| 电气产品（特定） | 电気用品安全法 | PSE (菱形) | 特定电气用品（电源线、锂电池等）需第三方检测 + 菱形 PSE |
-| 电气产品（一般） | 电気用品安全法 | PSE (圆形) | 一般电气用品可自主检测 + 圆形 PSE |
-| 消费生活用品 | 消費生活用製品安全法 | PSC | 特定产品（婴儿床、打火机等）需 PSC 标识 |
-| 食品 | 食品衛生法 | 厚生劳动省检疫 | 进口食品需在港口接受检疫检查 |
-| 化妆品 | 薬機法 | 化妆品制造销售业许可 | 需日本境内持牌业者作为"制造销售业者" |
-| 医疗器械 | 薬機法 | PMDA 认证 | 根据分类需不同级别认证 |
-| 无线设备 | 电波法 | 技適マーク (TELEC) | 所有无线设备必须获得技術基準適合証明 |
-
-**实例：** 一个带 WiFi 功能的空气净化器出口日本，需要：PSE（电气安全）+ 技適マーク（WiFi 无线）+ 食品衛生法适用性确认（如果接触食品/饮用水）。没有技適マーク的无线设备在日本使用属于违法。
-
-#### 澳大利亚 (AU)
-
-| 产品类别 | 主管机构 | 必要认证 | 关键要求 |
-|----------|---------|---------|---------|
-| 电气产品 | EESS | RCM Mark (SAA) | 电气安全 + EMC 合规 |
-| 消费品安全 | ACCC | 符合 Australian Consumer Law | 强制安全标准 + 强制信息标准 |
-| 食品 | FSANZ | 食品标准合规 | Food Standards Code 标签要求 |
-| 治疗商品 | TGA | ARTG 注册 | 治疗性商品（含部分保健品）需 TGA 注册 |
+加载规则：
+- 市场由用户输入的目标市场决定；多市场审查逐一加载对应文件
+- 上表未覆盖的市场（如东南亚各国）按本文件全球通用原则审查，并对市场专属法规做实时检索
+- `references/` 文件缺失时（不完整安装），按通用原则审查并在报告中标注
+  「⚠️ 未加载 {市场} 详细规则表，结论需人工复核」
 
 ### 准入审查执行步骤
 
@@ -203,41 +155,11 @@ description: 跨境电商合规审查。输入产品+目标市场，输出认证
 | 减重声明 | "7 天瘦 10 斤" "lose weight fast" | "配合健康饮食和运动使用" |
 | 防水等级 | "waterproof"（未经 IP 测试） | "water-resistant (IPX4 rated)" |
 
-### 美国 FTC 规则细化
+### 市场专属文案细则 — 按需加载
 
-| FTC 规则 | 要求 | 违规后果 | 高风险短语 |
-|----------|------|---------|-----------|
-| Substantiation | 所有客观声明必须有"合理依据" | 罚款 + 禁令 | "clinically proven" "scientifically tested"（无检测报告时） |
-| Endorsements | 付费评价/推荐必须披露关系 | 罚款最高 $50,120/次 | "as recommended by doctors"（无真实背书时） |
-| Made in USA | 产品"全部或几乎全部"在美制造才能声称 | FTC 调查 + 罚款 | "Made in USA"（中国组装产品绝对不能用） |
-| Comparative Ads | 对比必须公平、准确、可验证 | 竞争对手诉讼 | "better than [Brand X]"（无检测数据时） |
-| Environmental | 环保声明需具体且有依据 (FTC Green Guides) | 罚款 + 强制更正 | "biodegradable" "carbon neutral"（无第三方认证） |
-| Children's | COPPA: 不能收集 13 岁以下儿童数据 | 巨额罚款 | 面向儿童的产品页收集邮箱/生日 |
-
-**中国卖家常踩的 FTC 坑：**
-- "Best seller" — 除非你真的是 Amazon BSR #1 并有截图证据
-- "Award-winning" — 必须有真实获奖记录
-- "Doctor recommended" — 需要有真实医生背书文件
-- 产品图片展示效果与实际不符（如过度 PS）
-
-### 欧盟消费者保护指令
-
-| 指令 | 要求 | 高风险场景 |
-|------|------|-----------|
-| Unfair Commercial Practices Directive 2005/29/EC | 禁止误导性和攻击性商业行为 | 虚假倒计时、虚构库存紧张、虚假好评 |
-| Consumer Rights Directive 2011/83/EU | 14 天无理由退货权（远程销售） | Listing 中不能暗示"不退不换" |
-| Price Indication Directive | 促销价须标注此前 30 天最低价 | "50% OFF"但原价是虚构的 |
-| EU Omnibus Directive (2022) | 在线评价必须说明是否经过验证 | 精选好评展示而隐藏差评 |
-
-### 日本 景品表示法
-
-| 违规类型 | 说明 | 高风险短语（日文 Listing） |
-|----------|------|--------------------------|
-| 優良誤認表示 | 夸大产品品质/性能 | "業界初" "特許技術"（无证据时） |
-| 有利誤認表示 | 虚假的价格/交易条件 | "通常価格 ¥10,000 → 今だけ ¥3,000"（通常价格不存在时） |
-| 打消表示不足 | 附加条件的字体太小或不显眼 | 促销条件用极小字号标注 |
-
-**日本市场特别注意：** 日本消费者厅对景品表示法执法非常严格。2023-2024 年多起中国跨境卖家因虚假折扣被处罚的案例。
+美国 FTC 规则细化、欧盟消费者保护指令、日本景品表示法等市场专属文案规则
+在 `references/market-{us,eu,jp}.md` 的「Listing 文案」节中，随 Module 1 的
+市场文件一并加载。本 Module 只保留全球通用检查项。
 
 ### 各市场图片要求
 
@@ -472,60 +394,9 @@ Step 3: 验证与交叉检查
 
 ### 7.2 各国关税与 Section 301 清单
 
-**美国（US）关税框架：**
-
-```
-总关税 = MFN 基础税率 + Section 301 附加税 + AD/CVD（如适用）
-
-MFN 税率：0-20%（取决于 HS Code）
-Section 301（中国产品附加关税，2026 年现行清单）：
-  List 1: 25%（~818 个税号）
-  List 2: 25%（~279 个税号）
-  List 3: 25%（~5,745 个税号）
-  List 4a: 7.5%（~2,500 个税号，部分被排除）
-
-  ⚠️ 2025 年新增：
-    电动汽车：100%
-    半导体：50%
-    电池/关键矿产：25%
-    钢铝：25%
-    太阳能电池：50%
-    港口起重机：25%
-    个人防护设备：25%
-    注射器/针头：50%
-
-确认方法：
-  → 搜索 "USTR Section 301 exclusions {HS code}"
-  → 检查是否有临时排除（exclusion）
-  → 注意排除的到期日
-```
-
-**欧盟（EU）关税 + VAT：**
-
-```
-进口环节：
-  关税 = CIF 价值 × 关税税率（0-12%，取决于 CN Code）
-  进口 VAT = (CIF + 关税) × VAT 税率
-
-各国 VAT 标准税率：
-  德国: 19%  |  法国: 20%  |  意大利: 22%
-  西班牙: 21%  |  荷兰: 21%  |  波兰: 23%
-  英国: 20%（已脱欧，单独申报）
-
-注意：部分品类有降低税率（如童装、食品、书籍）
-```
-
-**日本关税 + 消费税：**
-
-```
-关税 = CIF × 关税税率（0-15%，纺织品可达 10-15%）
-消费税 = (CIF + 关税) × 10%
-
-特殊：
-  · 个人进口（≤ ¥16,666）免关税免消费税
-  · 商业进口无免税额
-  · EPA 协定国家（东南亚等）可享受优惠税率
-```
+各市场关税框架（美国 MFN + Section 301、欧盟关税 + VAT、日本关税 + 消费税）
+在 `references/market-{us,eu,jp}.md` 的「关税框架」节中，随 Module 1 的市场文件
+一并加载。HS Code 归类流程见 7.1；税率确认必须结合实时检索（税率随政策变动）。
 
 ### 7.3 VAT/GST 注册义务
 

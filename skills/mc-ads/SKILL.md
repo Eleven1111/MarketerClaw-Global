@@ -46,7 +46,7 @@ description: 跨境电商广告投放策略。覆盖 Amazon PPC、Meta Ads、Goo
 
 | 数据类型 | 搜索模板示例 |
 |---------|------------|
-| 品类 CPC 基准 | `[品类] average CPC Amazon PPC 2025` |
+| 品类 CPC 基准 | `[品类] average CPC Amazon PPC {当前年份}`（年份以系统当天日期换算） |
 | 品类 ACOS 基准 | `[品类] average ACOS Amazon advertising benchmark` |
 | 竞品广告词 | `[竞品ASIN] sponsored keywords`、fetch 竞品 Listing 提取关键词 |
 | 品类 Google Shopping 竞争度 | `[品类] Google Shopping CPC benchmark` |
