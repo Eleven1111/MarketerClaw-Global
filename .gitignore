@@ -1,0 +1,25 @@
+# macOS
+.DS_Store
+
+# Internal planning & design docs
+docs/superpowers/
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+.coverage
+.pytest_cache/
+
+# Node
+node_modules/
+.next/
+
+# Session-local state (never publish)
+campaigns/
+checkpoint.md
+.omx/
