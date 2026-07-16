@@ -39,6 +39,14 @@ brand-brain/
 
 技能按需加载 Brand Brain 文件，不全量加载。mc-cmo 在交接时指定建议加载的文件列表。
 
+### Brand Brain 写入纪律
+
+- **工作区锚定**：`brand-brain/` 的解析顺序为 `MC_WORKSPACE` 环境变量 → 当前工作目录。
+  技能安装在全局目录（如 `~/.claude/skills/`）时，品牌数据仍写入用户工作区，禁止写入安装目录。
+- **并发写保护**：工作流并行阶段（如大促备战三技能并行、双环双审并行）中，各技能不直接写
+  brand-brain 文件；由 mc-cmo 在合并点串行统一写入。`learnings.jsonl` 只追加不重写；
+  `review-loop.md` 仅由 mc-cmo 维护。
+
 ---
 
 ## 项目定位
@@ -126,6 +134,10 @@ brand-brain/
 ```jsonl
 {"date":"2026-05-02","skill":"mc-ads","finding":"蓝牙耳机品类 CPC 从 $1.2 涨至 $1.5","action":"降低 Broad 竞价 15%","impact":"ACOS 预计降 5-8%","confidence":"medium"}
 ```
+
+复盘类回写（mc-sop Module 3.4）额外带 `"status"` 字段：已被数据验证的洞察记
+`"status":"verified"`，被证伪的假设记 `"status":"falsified"`（finding 中写明证据数据点）。
+无执行数据的预测性判断不回写；追加前做语义去重，与既有条目重复的跳过。
 
 ## 约定
 
