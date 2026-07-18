@@ -345,6 +345,11 @@ findings:
 - ✅ 可上架 → `verdict: pass`，`findings: []`。
 - `target` / `skill` 为产出被审的生产技能（mc-listing/mc-creative/mc-ads/mc-social）。
 
+增量复核（双环第 2 轮起，mc-cmo 携带上轮 findings + 修订对照调度时）：
+- 逐条核验上轮 finding 解决状态；**改动段落**全量审查。
+- **未改动段落**仅 `severity: block` 级新发现（已核实的违法/硬规则违反）进 findings；
+  新的 warn 级意见写「备注（不触发回炉）」随结论带出，供人工放行时参考。
+
 ### 优先处理排序
 
 🔴 高风险项按以下优先级排序：
