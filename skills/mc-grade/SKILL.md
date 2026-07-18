@@ -31,6 +31,19 @@ description: 跨境内容产出质量评审 evaluator。独立评 mc-listing/mc-
 
 评审锚点用高标准（"会被加购的文案 / 一搜就出来的关键词覆盖"），措辞本身就是质量转向器。
 
+### 合规边界（评分前置约束）
+
+被评产出受目标市场法规与平台规则约束（Amazon Style Guide / FTC / 各法域广告法——由 mc-compliance
+硬门禁把关）。以下内容的**缺席不构成质量缺陷**，不得因此扣分或出 finding：
+
+- 保证/退款类风险逆转语言（平台规则禁止出现在 Listing 文案中）
+- 未在 brand-brain 备档的属性/认证声明（vegan / non-GMO / certified 等——无据写入即编造）
+- 疗效承诺与超出备档事实的比较级声明
+
+评「转化力」的信任要素时，以**合规可用手段**（认证 / 检测 / 透明度 / 差异化 / 场景化）为满分基准；
+克制语气若为品牌基准（brand-master.md）要求，属品牌一致性达标而非文案力缺陷。
+合规化替代方案可以建议，但只作备注，不进 findings、不压分。
+
 判定：
 - 任一维度 **< 70** → 该产出出 `severity: warn` finding，`verdict: revise`。
 - 全维度 ≥ 70 → `verdict: pass`。
