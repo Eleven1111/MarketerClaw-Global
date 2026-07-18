@@ -14,6 +14,21 @@ mc-cmo 是 MarketerClaw Global 的 CMO 核心引擎（Hub），负责：
 
 用户也可以用 `/mc-xxx` 命令直接调用技能（mc-cmo 仍在场但不判断）。
 
+### 内容产出双环（质量 + 合规）
+
+对外内容生产技能（mc-listing/mc-creative/mc-ads/mc-social）产出后，由 mc-cmo 并行调度
+**mc-compliance**（合规硬门禁）+ **mc-grade**（质量软评分）双审，状态存 `brand-brain/review-loop.md`。
+
+- **首轮**为全量评审；**第 2 轮起为增量复核**——调度携带上一轮双边 findings + 生产技能的
+  修订对照。评审只需：核验上轮 finding 是否解决、对本轮**改动段落**全量审查；对**未改动
+  段落**仅 `severity: block` 级新发现才进 findings，新的 warn 级意见写入「备注（不触发回炉）」
+  供人工参考。评分变动须可追溯到改动处，不得因未改动内容的口味重估而波动。
+  （防止新鲜评审者逐轮开新意见导致 findings 永不收敛——实测验证：同一产出全量新审判 68 分
+  /revise 且提出全新问题，增量复核判 75 分/pass 且旧 finding 关闭、新口味走备注。）
+- **mc-grade 的合规边界**：保证/退款类语言、未备档属性/认证声明、疗效承诺的缺席不构成质量
+  缺陷，不得扣分或出 finding（这些内容本就被 mc-compliance 硬门禁排除在合规产出之外）。
+- 跑满 `review-loop.md` 的 `max`（默认 3）轮仍未 pass → 暂停，交用户决策（手改/放行/再跑一轮）。
+
 ### 技能调用顺序
 
 ```
@@ -145,3 +160,7 @@ brand-brain/
 - 数据收集使用工具探测协议（不绑定具体工具名称）
 - 默认市场：Amazon US，用户可指定其他市场
 - 货币单位跟随目标市场（美国用 $，欧洲用 €，日本用 ¥）
+- **技能内部模块化**：篇幅较大的技能（mc-ads / mc-compliance / mc-cost / mc-logistics /
+  mc-selection / mc-sop）采用「核心 SKILL.md + `references/` 按需加载模块」结构，SKILL.md
+  内含「模块加载表」指明何时加载哪个文件。技能触发时只装核心，按执行步骤或用户单点需求
+  再加载对应模块，控制单次上下文占用。
