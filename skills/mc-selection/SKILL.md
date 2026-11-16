@@ -101,13 +101,14 @@ Amazon 不是"找到一个爆款"的游戏，是"比下一个卖家运营得更�
 | Module 2 竞争格局分析 | 集中度 / 进入壁垒 / Review 壁垒 / 价格带 | `references/module-2-competition.md` |
 | Module 3 需求验证 | 关键词簇 / Review 挖掘 / 用户之声 / 交叉验证 | `references/module-3-demand-validation.md` |
 | Module 3.5 差异化定义 | 差异化不过关不进入决策矩阵 | `references/module-3-5-differentiation.md` |
+| 亚文化高溢价切品 | 仅在实体消费品追求高客单 / 非标 / 抗比价差异化时按需加载 | `references/subculture-sourcing.md` |
 | Module 4 选品决策矩阵 | 四维评分 / 红线检查 / GO·CONDITIONAL·PASS | `references/module-4-decision-matrix.md` |
 | Module 5 供应链初判 | 供应商寻源 / 供应链可行性 / 首批投入 | `references/module-5-supply-chain.md` |
 | Module 6 选品报告交付 | 报告结构 / 执行摘要 / 风险登记簿 / 反共识检验 / 行动计划 | `references/module-6-report-delivery.md` |
 | 应用示例 | 需要完整 worked example 时 | `references/examples.md` |
 
 加载规则：
-- 按「执行步骤」推进：Step 2→M1，Step 3→M2，Step 4→M3（不过关补 M3.5），Step 5→M4+M5，Step 6→M6
+- 按「执行步骤」推进：Step 2→M1，Step 3→M2，Step 4→M3（不过关补 M3.5；实体非标高溢价方向按需叠加 `subculture-sourcing.md`），Step 5→M4+M5，Step 6→M6
 - 用户只要单模块（"只看竞争格局"）→ 只加载对应文件
 - `references/` 文件缺失时（不完整安装），按执行步骤中的模块概述执行，并在交付卡标注
   「⚠️ 未加载 {模块} 详表，深度受限」
@@ -272,7 +273,7 @@ mc-selection · 选品研究完成
    [3] {来源说明}
 
 下一步:
-   · {如果 GO} 用 mc-listing 准备 Listing → mc-ads 准备广告策略
+   · {如果 GO} 用 mc-product 定义产品微创新与量化规格 → mc-cost 精算利润 → mc-listing 准备 Listing
    · {如果 CONDITIONAL} 解决 {条件} 后重新评估
    · {如果 PASS} 考虑替代品类方向 → 重新触发 mc-selection
    · 用 mc-compliance 审查目标品类合规风险

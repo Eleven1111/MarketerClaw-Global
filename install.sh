@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# MarketerClaw Global installer  v1.0
+# MarketerClaw Global installer  v1.1
 # Usage:
 #   ./install.sh               → installs to ~/.claude/skills/   (Claude Code)
 #   ./install.sh --openclaw    → installs to ~/.openclaw/skills/ (OpenClaw)
@@ -27,23 +27,39 @@ esac
 
 TARGET_DIR="$BASE_DIR/skills"
 
+# Guard against installing a checkout onto itself (e.g. ./install.sh --local
+# inside the repo root), which would wipe skills before copying from itself.
+mkdir -p "$TARGET_DIR"
+if [[ "$(cd "$SKILLS_SRC" && pwd -P)" == "$(cd "$TARGET_DIR" && pwd -P)" ]]; then
+  echo "  ✓ Source and target are the same directory ($TARGET_DIR) — already installed in place, nothing to do."
+  exit 0
+fi
+
 # Skills to install (all mc-* by default, or pass skill names as extra args)
 if [[ $# -gt 1 ]]; then
   SKILLS=("${@:2}")
 else
-  SKILLS=($(ls "$SKILLS_SRC"))
+  SKILLS=()
+  for dir in "$SKILLS_SRC"/mc-*/; do
+    SKILLS+=("$(basename "$dir")")
+  done
 fi
 
+for skill in "${SKILLS[@]}"; do
+  if [[ ! "$skill" =~ ^mc-[a-z0-9-]+$ ]]; then
+    echo "  ✖ Invalid skill name '$skill' (expected mc-<name>)" >&2
+    exit 1
+  fi
+done
+
 echo ""
-echo "  MarketerClaw Global Installer v1.0"
+echo "  MarketerClaw Global Installer v1.1"
 echo "  ─────────────────────────────────────"
 echo "  Source skills : $SKILLS_SRC"
 echo "  Target skills : $TARGET_DIR"
 echo "  Skills        : ${SKILLS[*]}"
 echo "  ─────────────────────────────────────"
 echo ""
-
-mkdir -p "$TARGET_DIR"
 
 installed=0
 for skill in "${SKILLS[@]}"; do
@@ -55,8 +71,11 @@ for skill in "${SKILLS[@]}"; do
     continue
   fi
 
+  # Copy first, swap second: a failed copy never leaves the old skill deleted.
+  rm -rf "$dst.mc-new"
+  cp -R "$src" "$dst.mc-new"
   rm -rf "$dst"
-  cp -R "$src" "$dst"
+  mv "$dst.mc-new" "$dst"
   echo "  ✅ $skill → $dst"
   installed=$((installed + 1))
 done

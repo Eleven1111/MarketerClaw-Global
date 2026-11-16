@@ -236,6 +236,22 @@ EXTRA THICK 1/2 INCH CUSHION — High-density NBR foam provides superior joint p
 
 每条 BP 至少隐性解决一个用户痛点。
 
+### 3.3b 前置「盗雷法」（Honest Trade-off 主动披露，降 Amazon NCX 退货率）
+
+完美无缺的宣传在 Amazon 与独立站评论区反而触发买家警惕；更有效的方式是在 BP5 或副图/A+ 对比表里，主动挑明 **1 项由核心工艺或材质优势必然带来的非缺陷取舍**（"Who This Is NOT For"），把原本会转化为 `"Item not as described"` 退货和 1★ 差评的预期落差提前拦截掉：
+
+1. **挑明物理/工艺取舍**（实话实说）→ *"Note: Due to the solid 1.2mm 316L steel base..."*
+2. **绑定核心优势归因** → *"...it weighs 2.4 lbs for heat retention rather than ultralight backpacking."*
+3. **给出人群筛选建议** → *"Best for home kitchens; choose our Titanium Travel Edition if ultralight weight is your priority."*
+
+> **合规红线**：只限如实说明合理的物理尺寸、重量、天然木纹/色差或材质特性；**绝对禁止**以任何形式暗示"轻微差异/定制不退"或限制 Amazon 30 天 / EU 14 天退货权。
+
+### 3.3c 技术参数「日常体感参照物」与真实物理证言（Visual Proof）
+
+- **日常体感强制转译**：面向普通消费者时，禁止只堆裸工程缩写与单位，必须转译成美国/目标市场常见物理参照（同时附**英制 + 公制**）：如重量 `480 g (1.06 lbs) — about the weight of a standard water bottle`；噪音 `38 dB at 1m — quieter than a quiet library`。
+- **真实测试条件防虚标**：标注续航小时数必须写明测试条件（如 `Up to 8 hrs on Low mode`），**严禁用电池容量 mAh 直接按公式换算成使用天数**。
+- **物理实测视觉证言 (Visual Proof)**：副图与 A+ 优先展示真实可复现的实测画面（9x 微距看接缝与表面质感、卡尺厚度实拍、热成像对比、实测承重读数、不点名竞品客观维度对比表），禁止 AI 伪造实测画面或修改产品实物比例。
+
 ### 3.4 格式规范
 
 - 每条 200-250 字符（过长会被截断，移动端体验差）

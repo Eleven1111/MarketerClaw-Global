@@ -7,7 +7,7 @@
 mc-cmo 是 MarketerClaw Global 的 CMO 核心引擎（Hub），负责：
 - 判断请求是否合理，开口先算账
 - 根据用户关系阶段（new/building/partner）调节干预强度
-- 检测危机模式（cash_crisis/listing_crisis/stock_crisis）
+- 检测危机模式（cash_crisis/listing_crisis/stock_crisis/pr_crisis）
 - 感知季节阶段，调整策略倾向
 - 匹配预设工作流，串联多技能执行
 - 判断完成后在同一技能内完成路由与执行
@@ -92,7 +92,8 @@ brand-brain/
 ### 产品与供应链层
 | 技能 | 职责 |
 |------|------|
-| mc-selection | 跨境选品研究（品类机会 + 竞争格局 + 决策矩阵） |
+| mc-selection | 跨境选品研究（品类机会 + 竞争格局 + 亚文化切品 + 决策矩阵） |
+| mc-product | 出海造品与产品线架构（量化立规 + 轻改造 + 命名锁权 + 跨 SKU 单元经济） |
 | mc-cost | 利润与成本计算（FBA 费用 + 关税 + 定价 + 多平台对比） |
 | mc-logistics | 跨境物流决策（头程选择 / FBA vs 3PL / 备货计划） |
 | mc-launch | 新品上市引擎（四阶段框架 + PMF 评估 + 冷启动预算） |
@@ -108,12 +109,12 @@ brand-brain/
 ### 品牌与用户层
 | 技能 | 职责 |
 |------|------|
-| mc-brand | 品牌备案与知识产权保护 |
-| mc-social | 社媒运营（TikTok/IG/Pinterest + 达人筛选 + UGC 飞轮） |
-| mc-retain | 用户留存与 LTV（RFM 分层 + S&S 优化 + 召回体系） |
-| mc-compete | 竞品分析（6 模块 + 对标学习 + 自动写入 Brand Brain） |
-| mc-monitor | 竞品数据监控 |
-| mc-insight | 目标市场文化洞察 |
+| mc-brand | 跨境品牌战略定位（资产光谱/动态 VI/多品牌 Buy Box 隔离）+ Brand Registry 与 IP 保护 |
+| mc-social | 社媒运营（TikTok/IG/Pinterest + 达人背调与两轮接力 + Giveaway 门禁 + UGC 飞轮） |
+| mc-retain | 用户留存与 LTV（RFM 分层 + S&S 优化 + JND 护栏 + 独立站赠品工程与召回） |
+| mc-compete | 竞品分析（结构性反打 + C+/A+ 价值曲线 + 6 模块 + 自动写入 Brand Brain） |
+| mc-monitor | 双模式实时监控（Mode A 竞品商品数据 + Mode B 海外口碑与舆情流速） |
+| mc-insight | 目标市场文化洞察（去标签盲测 + 反共识检验） |
 
 ### 运营与合规层
 | 技能 | 职责 |
@@ -160,7 +161,9 @@ brand-brain/
 - 数据收集使用工具探测协议（不绑定具体工具名称）
 - 默认市场：Amazon US，用户可指定其他市场
 - 货币单位跟随目标市场（美国用 $，欧洲用 €，日本用 ¥）
-- **技能内部模块化**：篇幅较大的技能（mc-ads / mc-compliance / mc-cost / mc-logistics /
-  mc-selection / mc-sop）采用「核心 SKILL.md + `references/` 按需加载模块」结构，SKILL.md
-  内含「模块加载表」指明何时加载哪个文件。技能触发时只装核心，按执行步骤或用户单点需求
-  再加载对应模块，控制单次上下文占用。
+- **技能内部模块化**：篇幅较大或含专项扩展的技能（mc-ads / mc-brand / mc-compliance / mc-cost /
+  mc-diagnose / mc-logistics / mc-product / mc-selection / mc-sop）采用「核心 SKILL.md +
+  `references/` 按需加载模块」结构，技能触发时只装核心，按执行步骤或用户单点需求再加载对应模块，
+  控制单次上下文占用。
+- **仓库守卫测试**：技能层仍保持纯 Markdown（无 `scripts/` 运行时依赖）；结构、引用闭环与合规红线由
+  `node --test "tests/*.test.mjs"` 守护（800 行上限、`references/` 双向引用、跨境法规与黑帽扫描、零外部归属）。

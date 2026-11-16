@@ -53,7 +53,7 @@ description: 跨境电商创意生产中心。视觉素材设计（Amazon主图/
 | Pain Point | Fear + urgency | "Still struggling with…?" | Health, beauty, productivity |
 | Benefit-Led | Numbers + savings | "Save $X / Get X% off" | Promotions, deals |
 | Social Proof | Data + authority | "Trusted by X+ customers" | New brand, high AOV |
-| Scarcity | Limited + deadline | "Only X left at this price" | Flash sales, Prime Day |
+| Scarcity | Real stock / deadline | "Offer ends [Date] (real batch only)" | Flash sales, Prime Day（严禁虚构倒计时或假库存） |
 | Lifestyle | Aspiration + identity | "The X that fits your…" | DTC brands, premium |
 
 **跨境文案铁律**：
@@ -100,7 +100,29 @@ description: 跨境电商创意生产中心。视觉素材设计（Amazon主图/
 | 宠物 | 温馨/可爱 | 全球通用，日本更 kawaii |
 | 食品/保健 | 自然/有机感 | 欧美重成分透明，亚洲重功效 |
 
-### Step 6：脑神经科学检查
+### Step 6：动态视觉骨架（30/70）与 AIGC 规范（多 SKU 矩阵必看）
+
+衔接 `mc-brand` 模块 8：跨 SKU 制作 A+、Storefront、Meta 或 TikTok 批量素材时，先锁死不变量再放开变量，避免每批图风格漂移或千篇一律：
+
+- **6 选 1–2 系列化编码法**：色相分线法（按功效/口味切辅色）/ 容器取景窗法 / 母体骨架局部变异法 / 模块化徽章矩阵法（实测标尺角标）/ 固定影调自由构图法 / 双章并列联名锁定期。
+- **物理工艺与光影 Prompt 变体**（仅用于辅助氛围与背景，**不得伪造产品本体材质或功效对比**）：`matte-gloss contrast`、`anodized brushed metal`、`wabi-sabi ceramic texture`、`raw material flat-lay`、`top-down spotlight beam`、`water-ripple caustics`。
+- **AIGC 合规硬边界**：遵循 `skills/mc-compliance/references/ai-content.md`——AI 生成的逼真视频/人物需按平台（TikTok/YouTube/Meta）加注披露标签；Amazon 产品本体外观、质感与微距实测图**禁止**用 AI 生成或美化替代；严禁用 AI 制作护肤/减重 Before-After 功效图或虚假"真实买家"证言。
+
+```json
+{
+  "style_id": "{brand-or-campaign-style}",
+  "style_fidelity_anchors": [
+    "{30% 不变量识别骨架（全线锁死）：构图留白比例、核心几何框/角标位、主光影色温、品牌主色 #HEX — 遮住 Logo 仍能 1 秒认出品牌}"
+  ],
+  "variable_slots": {
+    "coding_mode": "{选定系列化编码法}",
+    "sku_or_campaign_variants": "{70% 可变量槽位：SKU 分线辅色、本地化场景道具、平台画幅 1:1 / 4:5 / 9:16}"
+  },
+  "negative_prompt": "fake awards, fake FDA/CE badges, altered product shape, AI-generated before-after, garbled text"
+}
+```
+
+### Step 7：脑神经科学检查
 
 7 条硬结论逐项审查：
 1. **图像优先**：产品/场景图是否占最大面积？
@@ -108,10 +130,10 @@ description: 跨境电商创意生产中心。视觉素材设计（Amazon主图/
 3. **视线引导**：人物/模特视线是否指向卖点或 CTA？
 4. **对比度**：文字在产品图/场景上是否清晰可读？
 5. **认知流畅**：字体是否简洁（Sans-serif 优先）？
-6. **视觉一致**：是否与品牌其他素材保持统一视觉锤？
-7. **损失框架**："Only 3 left" 优于 "97 in stock"
+6. **视觉一致**：遮住 Logo 与产品名，是否仍能凭 `style_fidelity_anchors` 1 秒认出品牌且跨 SKU 已按 `variable_slots` 拉开新鲜感？
+7. **损失框架**：避免虚构紧迫，可改用明确截止规则或清晰利益对比（严禁伪造 Only 3 left 类假库存紧迫话术）
 
-### Step 7：三秒检验
+### Step 8：三秒检验
 
 > **第 1 秒**：能看清产品是什么？
 > **第 2 秒**：能理解"为什么买"？
@@ -237,7 +259,7 @@ description: 跨境电商创意生产中心。视觉素材设计（Amazon主图/
 {market-specific adjustments}
 
 ### AI Image Prompt（optional）
-{Midjourney / DALL·E prompt}
+{Midjourney / DALL·E prompt + 需遵循 style_fidelity_anchors / variable_slots 约束；仅限氛围/背景参考，不替代真实产品实拍}
 
 ### 3-Second Validation ✅
 - Second 1: {pass/adjust}

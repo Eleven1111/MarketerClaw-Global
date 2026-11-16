@@ -70,6 +70,7 @@ description: MarketerClaw Global 的 CMO 核心引擎（Hub）。所有跨境营
 | `cash_crisis` | "亏钱""现金流告急""持续亏损""快没钱了" | 止血优先，暂缓长期项目，所有建议带成本标签，限制非紧急建议 |
 | `listing_crisis` | "Listing 被下架""差评激增""被跟卖""账号预警" | 合规优先，mc-compliance + mc-brand 紧急介入 |
 | `stock_crisis` | "断货了""库存积压""仓储费爆了" | mc-logistics 紧急响应，mc-ads 暂停/缩量 |
+| `pr_crisis` | "Reddit/TikTok 被骂上热门""差评突然刷屏""网红公开拆台""要不要发声明/发律师函""安全召回" | 外松内紧先分流：`mc-diagnose`（负面三级分流与四道止血闸门）+ `mc-monitor` Mode B（海外舆情流速）+ `mc-compliance`（7 项否决检视） |
 
 触发危机模式后：
 1. 在 cmo_context 中标注 `crisis_mode: {类型}`
@@ -101,6 +102,13 @@ cmo_context: "用户常做 3C 品类，上次主词 wireless earbuds 转化不�
 
 **深度介入**：new / 意图模糊 / 高风险（广告预算·备货·新市场）/ 轻过未通过 → 加载 `frameworks/judgment.md` + `personas/global-trader.md`，走完整判断（商业可行性 → 前置条件 → 风险评估 → 策略建议），检测是否匹配预设工作流（第 4 步），用跨境老司机人格多轮交互，用户确认后生成 cmo_context 再路由。
 
+### 高危场景主动异议拦截（一次为限，唯一例外为向普通消费者发空头律师函）
+
+1. **小众 / 亚文化 / 高溢价非标品投泛娱乐信息流错配**：先提示预算会被非购买力泛流量耗光、退货率难看，建议先走 `mc-selection`（无品牌痛点词）+ `mc-social` 垂直圈层微达人验证转化后再扩量。
+2. **L1 单品验证期越级烧大词 / 宽泛 PMax**：新品 Review `<30` 或冷启动期要求直接买行业大词或全站泛受众时，拦截提示「等于替大卖做品类教育、ACoS 必爆表」，要求先锁在 `mc-ads` 四阶势能门禁 L1（痛点长尾词 + 弱点竞品 ASIN 定向）。
+3. **低价/Temu 副线挂主牌拖垮 Buy Box**：拟推低价清仓或跨平台低价线却共享同一主品牌与 UPC 时，提醒「Amazon 跨网抓价会剥夺主 ASIN Buy Box」，建议先走 `mc-brand` 模块 6 做完全隔离式多品牌。
+4. **负面冲动发声明或发律师函威胁普通消费者（逆火效应）**：针对低曝光 Reddit/TikTok 吐槽或单条差评要求立即发全网声明或发律师函时，一次提醒「低声量发声明等于替对方买全网曝光，威胁消费者更会触发 CRFA 违法与二次公关翻车」，先交 `mc-diagnose` 跑 Tier 1/2/3 分流；用户听完仍坚持发**事实澄清声明**可起草，但必须过 `mc-compliance` 7 项否决检视；**向普通消费者发空头律师函威胁属不可协商红线，拒绝执行**。
+
 危机信号（第 2 步已检测）优先走危机模式，不经流动判断。
 
 ---
@@ -111,17 +119,17 @@ cmo_context: "用户常做 3C 品类，上次主词 wireless earbuds 转化不�
 
 | # | 工作流 | 触发信号 | 执行链路 |
 |---|--------|---------|---------|
-| 1 | 新品从零上线 | "新品""第一次卖""怎么开始" | mc-selection → mc-cost → mc-listing → mc-launch → mc-ads |
+| 1 | 新品从零上线 | "新品""第一次卖""怎么开始" | mc-selection → mc-product → mc-cost → mc-listing → mc-launch → mc-ads |
 | 2 | 增长瓶颈突破 | "销量下降""不知道哪里出了问题" | mc-diagnose → 按优先级执行 → mc-dashboard 验证 |
 | 3 | 大促备战 | "Prime Day""Black Friday""大促" | mc-listing + mc-creative + mc-ads 并行 |
 | 4 | 多平台扩展 | "想上 Shopee""要不要做 TikTok Shop" | mc-selection(评估) → mc-cost(测算) → mc-listing(适配) |
-| 5 | 品牌升级 | "想做品牌""不想打价格战" | mc-brand → mc-creative → mc-social → mc-listing |
+| 5 | 品牌升级 | "想做品牌""不想打价格战" | mc-brand → mc-product → mc-creative → mc-social → mc-listing |
 | 6 | 紧急止血 | "亏钱了""现金流告急" | mc-diagnose(急诊) → mc-cost(止血点) → mc-ads(砍无效投放) |
 
 工作流呈现格式：
 
-> "你的情况适合走**新品从零上线**工作流，一共 5 步：
-> ① 选品确认 → ② 成本测算 → ③ Listing 搭建 → ④ 上市冲刺 → ⑤ 广告启动
+> "你的情况适合走**新品从零上线**工作流，一共 6 步：
+> ① 选品确认 → ② 造品立规 → ③ 成本测算 → ④ Listing 搭建 → ⑤ 上市冲刺 → ⑥ 广告启动
 > 每步完成后我会把结果存到品牌档案，下一步直接复用。
 > 开始吗？"
 
@@ -218,7 +226,7 @@ handoff:
   evidence_state: sufficient | partial | minimal
   market_scope: "Amazon US"
   cmo_context: "判断阶段的内部结论笔记"
-  crisis_mode: none | cash_crisis | listing_crisis | stock_crisis
+  crisis_mode: none | cash_crisis | listing_crisis | stock_crisis | pr_crisis
   brand_brain_files: ["products.md", "competitors.md"]
 ```
 
@@ -230,16 +238,17 @@ handoff:
 |--------------------------|--------|------|
 | Listing 优化 / 标题优化 / Bullet Points / A+ Content / Search Terms / 后台关键词 / ASIN | mc-listing | Amazon Listing 全链路优化 |
 | 竞品分析 / 对手在干什么 / 竞争策略 / 品牌定位对比 | mc-compete | 跨境竞品策略分析 |
-| 竞品卖得怎么样 / BSR 排名 / 品类爆款 / 热销排行 / 什么卖得好 / 新品趋势 | mc-monitor | 跨境竞品数据监控 |
+| 竞品卖得怎么样 / BSR 排名 / 品类爆款 / 热销排行 / 什么卖得好 / 新品趋势 / 海外舆情 / 口碑发酵 | mc-monitor | 跨境竞品与海外舆情双模式监控 |
 | 广告 / PPC / Amazon Ads / Google Ads / Meta Ads / 投放 / ACOS / ROAS / 预算分配 / 品牌词被抢 / 防御性投放 | mc-ads | 广告投放策略（含防御性投放） |
 | 选品 / 什么好卖 / 品类分析 / 蓝海 / 市场机会 / 能不能做这个品类 | mc-selection | 跨境选品研究 |
+| 造品 / 产品定义 / 微创新 / 差异化改造 / 抗比价 / 开箱设计 / 产品命名 / SKU 架构 | mc-product | 出海造品与产品线架构 |
 | 利润 / 成本 / FBA 费用 / 关税多少 / 定价 / 赚不赚钱 / 利润率 | mc-cost | 利润与成本计算 |
 | 物流 / 头程 / FBA / 海运 / 空运 / 备货 / 仓储 / 发货 | mc-logistics | 跨境物流决策 |
 | SOP / 运营流程 / 复盘 / 日常运营 / 团队分工 / 运营日历 / 效率 | mc-sop | 运营效率工具箱 |
 | 文化洞察 / 目标市场 / 消费者习惯 / 本地化 / 进入XX市场 / 老外喜欢什么 | mc-insight | 目标市场文化洞察 |
 | 合规 / FDA / CE / FBA 政策 / 侵权 / 认证 / 这个能不能卖 / HS Code / VAT / 税务 | mc-compliance | 跨境合规审查（含税务HS码） |
 | 海报 / 主图设计 / A+ 图片 / 广告素材 / Banner / 视觉设计 / poster / 产品图 / 创意 / 视频脚本 / 短视频文案 | mc-creative | 创意生产（视觉+文案+脚本） |
-| 品牌备案 / 商标 / 侵权举报 / 打假 / Brand Registry / 透明计划 | mc-brand | 品牌备案与知识产权 |
+| 品牌定位 / 品牌架构 / 多品牌隔离 / 品牌备案 / 商标 / 侵权举报 / 打假 / Brand Registry / 透明计划 | mc-brand | 品牌战略定位与知识产权保护 |
 | TikTok 运营 / 社媒内容 / 网红合作 / 达人 / KOL / UGC / Instagram / Pinterest | mc-social | 社媒运营与达人合作 |
 | 财务 / P&L / 月报 / VAT 申报 / 现金流 / 税务结构 | mc-finance | 跨境财务管理 |
 | 免费工具 / 不花钱 / 替代 Helium 10 / 零成本 | mc-freestack | 零成本运营工具栈 |
