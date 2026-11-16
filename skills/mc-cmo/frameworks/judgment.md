@@ -30,7 +30,8 @@ mc-cmo 在**轻过**和**深度介入**中使用此框架做出判断。**直通
 | mc-compliance（查询） | mc-convert（审计） | 新市场进入 |
 | mc-dashboard（查看） | mc-creative | mc-selection（决策阶段） |
 | mc-diagnose（体检） | mc-social | mc-launch（预算分配） |
-| | mc-retain（分析） | mc-retain（大规模投入） |
+| | mc-product（差异化改造） | mc-retain（大规模投入） |
+| | mc-retain（分析） | mc-brand（多品牌架构隔离） |
 
 ### 3. 合规检查？
 - 目标市场的产品是否涉及特殊认证？（FDA、CE、FCC 等）
@@ -48,6 +49,7 @@ mc-cmo 在**轻过**和**深度介入**中使用此框架做出判断。**直通
 | `cash_crisis` | 亏钱/现金流/持续亏损/快没钱了/止血 | 止血优先，限制非紧急建议 |
 | `listing_crisis` | 被下架/差评激增/被跟卖/账号预警/侵权 | 合规优先，mc-compliance + mc-brand 紧急介入 |
 | `stock_crisis` | 断货/库存积压/仓储费爆/滞销 | mc-logistics 紧急响应，mc-ads 暂停/缩量 |
+| `pr_crisis` | Reddit/TikTok 群嘲/差评刷屏/安全召回/要发声明或律师函 | 外松内紧：`mc-diagnose` 三级分流 + `mc-monitor` Mode B + `mc-compliance` 7 项否决 |
 
 ---
 
@@ -67,6 +69,7 @@ mc-cmo 在**轻过**和**深度介入**中使用此框架做出判断。**直通
 - 竞品分析是否到位？
 - 合规要求是否已确认？
 - 供应链是否就绪？
+- **常见拦截（势能—买量颗粒度错配 & 负面冲动发声）**：L1 冷启动未跑通痛点长尾词即要求买泛品类大词或泛 PMax，必须拦截锁回 L1；对低声量 Reddit/TikTok 吐槽要求直接发公开声明或空头律师函，必须先过 `mc-diagnose` 三级分流且拒绝对普通消费者发空头律师函。
 
 缺失的前置条件按重要性排序，向用户建议补全路径。
 
@@ -75,6 +78,7 @@ mc-cmo 在**轻过**和**深度介入**中使用此框架做出判断。**直通
 - 库存风险：备货量是否合理？滞销怎么处理？
 - 合规风险：产品是否可能被下架？
 - 竞争风险：大卖是否会跟进？价格战概率？
+- **高危烧钱与逆火风险**：冷启动直冲品类大词（替头部买流量）、低价线挂主牌触发 Amazon Buy Box 抓价剥夺、低曝光负面发全网声明造成 Streisand 放大，属不可逆高危项，路由前必须预警。
 
 ### Step D: 策略建议
 基于 A/B/C 的分析，给出：
@@ -104,7 +108,7 @@ mc-cmo 在 cmo_context 中提醒目标技能遵守成本标签规范。
 **建议**：{给技能的执行建议，1-2 句话}
 **用户阶段**：{new/building/partner} — {该阶段的沟通要求}
 **季节阶段**：{淡季恢复/平稳增长/Prime Day 备战/Q4 旺季备战/BFCM 旺季}
-**危机模式**：{none/cash_crisis/listing_crisis/stock_crisis}
+**危机模式**：{none/cash_crisis/listing_crisis/stock_crisis/pr_crisis}
 **合规提醒**：{如有，标注需要注意的合规事项}
 **加载文件**：{建议目标技能加载的 Brand Brain 文件}
 <!-- /CMO Context -->
