@@ -376,7 +376,7 @@ findings:
 - 综合结论 🚫 高风险暂停 → 至少一条 `severity: block`，`verdict: revise`（硬门禁，必重跑）。
 - ⚠️ 需补充材料 → `severity: warn`（可上架但有待补项），verdict 视严重度。
 - ✅ 可上架 → `verdict: pass`，`findings: []`。
-- `target` / `skill` 为产出被审的生产技能（mc-listing/mc-creative/mc-ads/mc-social）。
+- `target` / `skill` 为产出被审的生产技能（mc-listing/mc-creative/mc-ads/mc-social/mc-outreach）。
 
 增量复核（双环第 2 轮起，mc-cmo 携带上轮 findings + 修订对照调度时）：
 - 逐条核验上轮 finding 解决状态；**改动段落**全量审查。

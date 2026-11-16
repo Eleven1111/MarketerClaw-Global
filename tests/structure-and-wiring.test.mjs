@@ -35,6 +35,7 @@ const EXPECTED_SKILLS = [
   "mc-listing",
   "mc-logistics",
   "mc-monitor",
+  "mc-outreach",
   "mc-product",
   "mc-retain",
   "mc-selection",
@@ -49,6 +50,7 @@ const SKILLS_WITH_REFERENCES = [
   "mc-cost",
   "mc-diagnose",
   "mc-logistics",
+  "mc-outreach",
   "mc-product",
   "mc-selection",
   "mc-sop",
@@ -81,7 +83,7 @@ function walkMdFiles(dir, base = "") {
   return out;
 }
 
-test("exact 23 cross-border skills exist with valid frontmatter and <= 799 line cap", () => {
+test("exact 24 cross-border skills exist with valid frontmatter and <= 799 line cap", () => {
   const dirs = mcDirs();
   assert.deepEqual(dirs, EXPECTED_SKILLS);
   for (const d of dirs) {
@@ -149,12 +151,12 @@ test("bidirectional references/*.md wiring across all modularized skills (no mis
   }
 });
 
-test("mc-cmo routes all non-evaluator skills and CLAUDE.md + README.md list all 23 skills", () => {
+test("mc-cmo routes all non-evaluator skills and CLAUDE.md + README.md list all 24 skills", () => {
   const cmo = read("skills", "mc-cmo", "SKILL.md");
   const claude = read("CLAUDE.md");
   const readme = read("README.md");
 
-  assert.match(readme, /23 个技能/);
+  assert.match(readme, /24 个技能/);
   for (const d of EXPECTED_SKILLS) {
     assert.ok(claude.includes(d), `CLAUDE.md missing ${d}`);
     assert.ok(readme.includes(d), `README.md missing ${d}`);
@@ -178,7 +180,7 @@ test("cross-border purity guard: no domestic-only scripts, workflows, platforms,
   assert.deepEqual(leaks, []);
 });
 
-test("install.sh installs all 23 skills cleanly, supports single-skill install, validates names, and guards same-dir --local", () => {
+test("install.sh installs all 24 skills cleanly, supports single-skill install, validates names, and guards same-dir --local", () => {
   const wsAll = mkdtempSync(join(tmpdir(), "mc-global-all-"));
   const wsOne = mkdtempSync(join(tmpdir(), "mc-global-one-"));
   try {
@@ -187,6 +189,16 @@ test("install.sh installs all 23 skills cleanly, supports single-skill install, 
       .filter((d) => d.startsWith("mc-"))
       .sort();
     assert.deepEqual(installed, EXPECTED_SKILLS);
+    assert.ok(
+      existsSync(
+        join(wsAll, "skills/mc-outreach/references/prospecting-and-verification.md"),
+      ),
+    );
+    assert.ok(
+      existsSync(
+        join(wsAll, "skills/mc-outreach/references/outreach-workbench-and-templates.md"),
+      ),
+    );
     assert.ok(
       existsSync(
         join(wsAll, "skills/mc-product/references/physical-craft-premium.md"),
