@@ -291,3 +291,67 @@ test("migrated PR #18-#21 cross-border capability packs landed in target skills"
     }
   }
 });
+
+test("mc-outreach lean B2B workflow anchors, honest delivery distinction, and cold-email compliance guards hold", () => {
+  const outreach = read("skills", "mc-outreach", "SKILL.md");
+  const verif = read(
+    "skills",
+    "mc-outreach",
+    "references",
+    "prospecting-and-verification.md",
+  );
+  const templates = read(
+    "skills",
+    "mc-outreach",
+    "references",
+    "outreach-workbench-and-templates.md",
+  );
+
+  for (const p of [
+    "dns.google",
+    "Verified Official",
+    "Pattern-Inferred",
+    "Catch-All / Risky",
+    "Contact Form / Alt Only",
+    "outreach-batch.html",
+    "CAN-SPAM",
+    "SPF",
+    "mc-compliance",
+  ]) {
+    assert.ok(outreach.includes(p), `mc-outreach/SKILL.md missing "${p}"`);
+  }
+  for (const p of ["ImportYeti", "Catch-All", "No Valid MX", "25 端口"]) {
+    assert.ok(verif.includes(p), `prospecting-and-verification.md missing "${p}"`);
+  }
+  for (const p of [
+    "CAN-SPAM",
+    "GDPR",
+    "Reply \"stop\"",
+    "outreach-results.json",
+    "trustFilter",
+    "statusFilter",
+    "too_long",
+  ]) {
+    assert.ok(templates.includes(p), `outreach-workbench-and-templates.md missing "${p}"`);
+  }
+  // Ensure we explicitly guard against falsely treating mailto: as server-side drafts or trusting raw Port 25 RCPT TO
+  assert.match(outreach, /禁止.*推算.*已验证|严禁把推算邮箱标为已验证/);
+  assert.match(templates, /不进云端草稿箱|不写入真草稿箱|仅唤起本地邮箱窗口/);
+
+  // Verify workbench inline script inside ```html code fence parses cleanly
+  const htmlBlock = templates.match(/```html\n([\s\S]*?)```/);
+  assert.ok(htmlBlock, "outreach workbench missing ```html code block");
+  const scriptMatch = htmlBlock[1].match(/<script>([\s\S]*?)<\/script>/);
+  assert.ok(scriptMatch, "outreach workbench skeleton missing <script> block");
+  assert.doesNotThrow(() => new Function(scriptMatch[1]));
+
+  // Verify dual-loop and workflow count alignment across repo docs
+  const readme = read("README.md");
+  const cmo = read("skills", "mc-cmo", "SKILL.md");
+  const grade = read("skills", "mc-grade", "SKILL.md");
+  const compliance = read("skills", "mc-compliance", "SKILL.md");
+  assert.match(readme, /7 套跨境场景/);
+  assert.ok(cmo.includes("mc-outreach（仅外发邮件文案段"));
+  assert.ok(grade.includes("mc-outreach"));
+  assert.ok(compliance.includes("mc-outreach"));
+});

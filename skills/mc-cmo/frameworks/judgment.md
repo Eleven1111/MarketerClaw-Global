@@ -30,8 +30,9 @@ mc-cmo 在**轻过**和**深度介入**中使用此框架做出判断。**直通
 | mc-compliance（查询） | mc-convert（审计） | 新市场进入 |
 | mc-dashboard（查看） | mc-creative | mc-selection（决策阶段） |
 | mc-diagnose（体检） | mc-social | mc-launch（预算分配） |
-| | mc-product（差异化改造） | mc-retain（大规模投入） |
+| mc-outreach（线索调研） | mc-product（差异化改造） | mc-retain（大规模投入） |
 | | mc-retain（分析） | mc-brand（多品牌架构隔离） |
+| | mc-outreach（开发信起草与外发） | mc-outreach（无域名隔离强行冷发） |
 
 ### 3. 合规检查？
 - 目标市场的产品是否涉及特殊认证？（FDA、CE、FCC 等）

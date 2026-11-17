@@ -108,6 +108,7 @@ cmo_context: "用户常做 3C 品类，上次主词 wireless earbuds 转化不�
 2. **L1 单品验证期越级烧大词 / 宽泛 PMax**：新品 Review `<30` 或冷启动期要求直接买行业大词或全站泛受众时，拦截提示「等于替大卖做品类教育、ACoS 必爆表」，要求先锁在 `mc-ads` 四阶势能门禁 L1（痛点长尾词 + 弱点竞品 ASIN 定向）。
 3. **低价/Temu 副线挂主牌拖垮 Buy Box**：拟推低价清仓或跨平台低价线却共享同一主品牌与 UPC 时，提醒「Amazon 跨网抓价会剥夺主 ASIN Buy Box」，建议先走 `mc-brand` 模块 6 做完全隔离式多品牌。
 4. **负面冲动发声明或发律师函威胁普通消费者（逆火效应）**：针对低曝光 Reddit/TikTok 吐槽或单条差评要求立即发全网声明或发律师函时，一次提醒「低声量发声明等于替对方买全网曝光，威胁消费者更会触发 CRFA 违法与二次公关翻车」，先交 `mc-diagnose` 跑 Tier 1/2/3 分流；用户听完仍坚持发**事实澄清声明**可起草，但必须过 `mc-compliance` 7 项否决检视；**向普通消费者发空头律师函威胁属不可协商红线，拒绝执行**。
+5. **未隔离主域名直接冷发 B2B 开发信**：要求直接用品牌主域、ERP 通知域或 Amazon 卖家账号域批量发送冷邮件，或未核验 `Pattern-Inferred` 邮箱直接群发时，先提醒「退信与投诉会连累正常报价与账号安全」，由 `mc-outreach` Step 0 强制检查独立辅域与 SPF/DKIM/DMARC 后再放行小批量名单。
 
 危机信号（第 2 步已检测）优先走危机模式，不经流动判断。
 
@@ -125,6 +126,7 @@ cmo_context: "用户常做 3C 品类，上次主词 wireless earbuds 转化不�
 | 4 | 多平台扩展 | "想上 Shopee""要不要做 TikTok Shop" | mc-selection(评估) → mc-cost(测算) → mc-listing(适配) |
 | 5 | 品牌升级 | "想做品牌""不想打价格战" | mc-brand → mc-product → mc-creative → mc-social → mc-listing |
 | 6 | 紧急止血 | "亏钱了""现金流告急" | mc-diagnose(急诊) → mc-cost(止血点) → mc-ads(砍无效投放) |
+| 7 | B2B 海外拓客与分销 | "找海外客户""外贸开发""进口商/批发商""cold email" | mc-product(量化卖点) → mc-cost(FOB/CIF 阶梯价) → mc-compliance(准入/认证与合规检查) → mc-outreach(线索清洗/五级验邮/审发台) |
 
 工作流呈现格式：
 
@@ -137,7 +139,7 @@ cmo_context: "用户常做 3C 品类，上次主词 wireless earbuds 转化不�
 
 ### 内容产出双环（质量 + 合规）
 
-工作流执行到**对外内容生产技能**（**mc-listing / mc-creative / mc-ads / mc-social**）并产出后，
+工作流执行到**对外内容生产技能**（**mc-listing / mc-creative / mc-ads / mc-social / mc-outreach（仅外发邮件文案段，线索清洗表自身不触发）**）并产出后，
 进入工作流下一步前执行双环（分析类技能 mc-cost/mc-logistics/mc-finance/mc-diagnose… **不触发**）：
 
 进入双环前，把 `brand-brain/review-loop.md` 的 `iteration` 归零（防同会话上轮残留）。然后：
@@ -151,7 +153,7 @@ cmo_context: "用户常做 3C 品类，上次主词 wireless earbuds 转化不�
    a. 读 `review-loop.md` 的 `iteration`；`iteration >= 3` → **暂停**：展示残留 block/warn findings
       + 当前产出，交用户决策（手改 / 放行 / 再跑一轮），结束自动双环。
    b. 否则按**产出→技能反查表**定位生产技能：
-      listing→mc-listing / 创意·素材·脚本→mc-creative / 广告文案→mc-ads / 社媒内容→mc-social。
+      listing→mc-listing / 创意·素材·脚本→mc-creative / 广告文案→mc-ads / 社媒内容→mc-social / B2B冷开发信→mc-outreach。
    c. 重跑该生产技能——**读现有产出 + 注入两边全部 issue 定向修订（非从零盲重生成，
       避免反复犯同一错误烧光轮次）**。
    d. `iteration += 1`，连同 `last_verdict` / `blocked_skills` 写回 `review-loop.md`；
@@ -257,6 +259,7 @@ handoff:
 | 新品上市 / 冷启动 / Launch 策略 / 新品怎么推 / 新品计划 | mc-launch | 新品上市 |
 | 转化率 / CVR / 为什么不买 / 页面优化 / 点击率低 / 转化低 | mc-convert | 转化优化 |
 | 复购 / 留存 / LTV / 老客户 / Subscribe & Save / 流失 / 召回 | mc-retain | 用户留存 |
+| 找海外客户 / B2B 开发 / 进口商 / 批发商 / 经销商 / 冷开发信 / cold email | mc-outreach | 跨境 B2B 买家开发与合规冷开发信工作流 |
 
 ### 市场自动判断
 

@@ -16,7 +16,7 @@ mc-cmo 是 MarketerClaw Global 的 CMO 核心引擎（Hub），负责：
 
 ### 内容产出双环（质量 + 合规）
 
-对外内容生产技能（mc-listing/mc-creative/mc-ads/mc-social）产出后，由 mc-cmo 并行调度
+对外内容生产技能（mc-listing/mc-creative/mc-ads/mc-social，以及工作流 7 下 mc-outreach 的外发冷开发信文案段）产出后，由 mc-cmo 并行调度
 **mc-compliance**（合规硬门禁）+ **mc-grade**（质量软评分）双审，状态存 `brand-brain/review-loop.md`。
 
 - **首轮**为全量评审；**第 2 轮起为增量复核**——调度携带上一轮双边 findings + 生产技能的
@@ -105,6 +105,7 @@ brand-brain/
 | mc-ads | 广告投放策略（Amazon PPC + Meta/Google + 防御性投放） |
 | mc-convert | 转化率优化引擎（Amazon CVR + 独立站 CRO + A/B 测试） |
 | mc-creative | 创意生产（视觉素材 + 广告测试矩阵 + 视频脚本 + 多平台适配） |
+| mc-outreach | 跨境 B2B 买家开发与合规冷开发信工作流（ICP 定标/提单线索/五级验邮/审发台） |
 
 ### 品牌与用户层
 | 技能 | 职责 |
@@ -162,7 +163,7 @@ brand-brain/
 - 默认市场：Amazon US，用户可指定其他市场
 - 货币单位跟随目标市场（美国用 $，欧洲用 €，日本用 ¥）
 - **技能内部模块化**：篇幅较大或含专项扩展的技能（mc-ads / mc-brand / mc-compliance / mc-cost /
-  mc-diagnose / mc-logistics / mc-product / mc-selection / mc-sop）采用「核心 SKILL.md +
+  mc-diagnose / mc-logistics / mc-outreach / mc-product / mc-selection / mc-sop）采用「核心 SKILL.md +
   `references/` 按需加载模块」结构，技能触发时只装核心，按执行步骤或用户单点需求再加载对应模块，
   控制单次上下文占用。
 - **仓库守卫测试**：技能层仍保持纯 Markdown（无 `scripts/` 运行时依赖）；结构、引用闭环与合规红线由
